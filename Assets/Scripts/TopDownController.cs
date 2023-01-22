@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TopDownController : MonoBehaviour
 {
@@ -9,6 +12,8 @@ public class TopDownController : MonoBehaviour
     bool boundl, boundr;
     public int depth;
     public int layer;
+    public TextMeshProUGUI LoseText;
+    public Button TryAgainButton;
 
     [SerializeField]
     private float layerbound1, layerbound2;
@@ -97,6 +102,22 @@ public class TopDownController : MonoBehaviour
             boundr = true;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("TopObstacle") && depth <= 2)
+        {
+            LoseText.enabled = true;
+            TryAgainButton.gameObject.SetActive(true);
+            StartCoroutine(EndGame());
 
+
+        }
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForEndOfFrame();
+        Time.timeScale = 0;
+    }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TopEnemySpawner : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class TopEnemySpawner : MonoBehaviour
     private float spawnTimer;
     public bool start;
     public float speed;
+    public int score;
+    public TextMeshProUGUI scoreBoard;
+    private int counterTimer;
 
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -27,11 +31,29 @@ public class TopEnemySpawner : MonoBehaviour
         currWave = 1;
         GenerateWave();
         speed = 3;
+        counterTimer = 50;
+        score = 0;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        //scoreboard script
+        scoreBoard.text = "Score: " + score;
+        counterTimer--;
+        if(counterTimer < 0)
+        {
+            counterTimer = 50;
+            score++;
+        }
+
+
+
+
+
+
+        //Spawning script
         if (spawnTimer <= 0)
         {
             //spawn an enemy
@@ -133,6 +155,8 @@ public class TopEnemySpawner : MonoBehaviour
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
     }
+
+    
 
 }
 

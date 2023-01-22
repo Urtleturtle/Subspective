@@ -2,6 +2,9 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SideController : MonoBehaviour
 {
@@ -11,6 +14,9 @@ public class SideController : MonoBehaviour
     public SpriteRenderer sr;
     public Animator SubT;
     public float[] depthLvls = new float[3];
+    public TextMeshProUGUI LoseText;
+    public Button TryAgainButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,5 +105,23 @@ public class SideController : MonoBehaviour
 
         SubT.gameObject.GetComponent<TopDownController>().depth = SubT.GetInteger("Depth");
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("SideObstacle"))
+        {
+            LoseText.enabled = true;
+            TryAgainButton.gameObject.SetActive(true);
+            StartCoroutine(EndGame());
+            
+
+        }
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForEndOfFrame();
+        Time.timeScale = 0;
     }
 }

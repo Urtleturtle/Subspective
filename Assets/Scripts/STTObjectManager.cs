@@ -6,6 +6,7 @@ public class STTObjectManager : MonoBehaviour
 {
 
     public GameObject[] Icebergs;
+    public GameObject TopSub;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,18 @@ public class STTObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("SideObstacle")){
+            if (g.GetComponent<BasicObstacleSpeedS>().layer == TopSub.GetComponent<TopDownController>().layer)
+            {
+                g.GetComponent<SpriteRenderer>().enabled = true;
+                g.GetComponent<PolygonCollider2D>().enabled = true;
+            }
+            else
+            {
+                g.GetComponent<SpriteRenderer>().enabled = false;
+                g.GetComponent<PolygonCollider2D>().enabled = false;
+            }
+        }
     }
 
     public void CreateIcebergS(float speed, int layer)
