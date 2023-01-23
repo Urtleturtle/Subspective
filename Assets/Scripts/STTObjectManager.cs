@@ -30,11 +30,12 @@ public class STTObjectManager : MonoBehaviour
         }
     }
 
-    public void CreateIcebergS(float speed, int layer)
+    public void CreateIcebergS(float speed, int layer, GameObject guide)
     {
         GameObject Icebergclone = Instantiate(Icebergs[Random.Range(0, Icebergs.Length - 1)], gameObject.transform.parent.transform, false);
         Icebergclone.transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
         Icebergclone.GetComponent<BasicObstacleSpeedS>().speed = speed;
         Icebergclone.GetComponent<BasicObstacleSpeedS>().layer = layer;
+        Icebergclone.GetComponent<BasicObstacleSpeedS>().guideObj = guide.transform;
     }
 }

@@ -13,7 +13,7 @@ public class BasicObstacleSpeedT : MonoBehaviour
         startingY = transform.localPosition.y;
         if (gameObject.name.Contains("Iceberg"))
         {
-            GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateIcebergS(speed/10*6, layer);
+            GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateIcebergS(speed/9.2f* 5.5f, layer, gameObject);
         }
     }
  

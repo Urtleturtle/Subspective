@@ -18,11 +18,11 @@ public class TideAnimation : MonoBehaviour
         {
             if(i == 0)
             {
-                waves[0].transform.localPosition = new Vector3(0, 3.39f, -2f);
+                waves[0].transform.localPosition = new Vector3(0, 3.385f, -2f);
             }
             else
             {
-                waves[i].transform.localPosition = new Vector3(i *waves[0].transform.Find("Wave").GetComponent<SpriteRenderer>().sprite.rect.width/20.0f , 3.39f, -2f);
+                waves[i].transform.localPosition = new Vector3(i *waves[0].transform.Find("Wave").GetComponent<SpriteRenderer>().sprite.rect.width/20.0f , 3.385f, -2f);
             }
         }
         waveoffset = waves[0].transform.Find("Wave").GetComponent<SpriteRenderer>().sprite.rect.width/20.0f;

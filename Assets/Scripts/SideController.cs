@@ -5,17 +5,20 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class SideController : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public int maxspd;
+    public float maxspd;
     public float waterline = 3.26f;
     public SpriteRenderer sr;
     public Animator SubT;
     public float[] depthLvls = new float[3];
-    public TextMeshProUGUI LoseText;
-    public Button TryAgainButton;
+
+    public PlayerInput playerInput;
+    public GameObject viewButton;
+    public ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class SideController : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         waterline = 3.26f;
         rb.gravityScale = 0;
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -34,11 +38,19 @@ public class SideController : MonoBehaviour
             rb.gravityScale = 0;
             if (Input.GetKey(KeyCode.S))
             {
-                rb.velocity += new Vector2(0, -0.005f);
+                rb.velocity += new Vector2(0, -0.004f);
             }
             else if (Input.GetKey(KeyCode.W))
             {
-                rb.velocity += new Vector2(0, 0.005f);
+                rb.velocity += new Vector2(0, 0.004f);
+            }
+            else if (playerInput.actions["Move"].ReadValue<Vector2>().y < 0 && viewButton.GetComponent<SwitchPerspective>().modeSide)
+            {
+                rb.velocity += new Vector2(0, -0.004f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
+            }
+            else if (playerInput.actions["Move"].ReadValue<Vector2>().y > 0 && viewButton.GetComponent<SwitchPerspective>().modeSide)
+            {
+                rb.velocity += new Vector2(0, 0.004f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
             }
             else
             {
@@ -111,17 +123,8 @@ public class SideController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("SideObstacle"))
         {
-            LoseText.enabled = true;
-            TryAgainButton.gameObject.SetActive(true);
-            StartCoroutine(EndGame());
-            
+            scoreManager.EndGame();
 
         }
-    }
-
-    IEnumerator EndGame()
-    {
-        yield return new WaitForEndOfFrame();
-        Time.timeScale = 0;
     }
 }

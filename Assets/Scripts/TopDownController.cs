@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class TopDownController : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class TopDownController : MonoBehaviour
     bool boundl, boundr;
     public int depth;
     public int layer;
-    public TextMeshProUGUI LoseText;
-    public Button TryAgainButton;
+
+    public PlayerInput playerInput;
+    public GameObject viewButton;
+    public ScoreManager scoreManager;
 
     [SerializeField]
     private float layerbound1, layerbound2;
@@ -21,6 +24,7 @@ public class TopDownController : MonoBehaviour
     void Start()
     {
         layer = 2;
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,23 @@ public class TopDownController : MonoBehaviour
             if (rotationVelocity > -.7f)
             {
                 rotationVelocity = -.3f;
+            }
+            boundl = false;
+        }
+        else if (playerInput.actions["Move"].ReadValue<Vector2>().x < 0 && !boundl && !viewButton.GetComponent<SwitchPerspective>().modeSide)
+        {
+            
+            if (rotationVelocity < .7f)
+            {
+                rotationVelocity = .3f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
+            }
+            boundr = false;
+        }
+        else if (playerInput.actions["Move"].ReadValue<Vector2>().x > 0 && !boundr && !viewButton.GetComponent<SwitchPerspective>().modeSide)
+        {
+            if (rotationVelocity > -.7f)
+            {
+                rotationVelocity = -.3f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
             }
             boundl = false;
         }
@@ -93,7 +114,7 @@ public class TopDownController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rb.rotation > 0)
+        if (transform.position.x < 0)
         {
             boundl = true;
         }
@@ -106,18 +127,12 @@ public class TopDownController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("TopObstacle") && depth <= 2)
         {
-            LoseText.enabled = true;
-            TryAgainButton.gameObject.SetActive(true);
-            StartCoroutine(EndGame());
+            scoreManager.EndGame();
 
 
         }
     }
 
-    IEnumerator EndGame()
-    {
-        yield return new WaitForEndOfFrame();
-        Time.timeScale = 0;
-    }
+    
 
 }

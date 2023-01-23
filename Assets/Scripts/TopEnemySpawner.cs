@@ -20,9 +20,7 @@ public class TopEnemySpawner : MonoBehaviour
     private float spawnTimer;
     public bool start;
     public float speed;
-    public int score;
-    public TextMeshProUGUI scoreBoard;
-    private int counterTimer;
+    
 
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -31,27 +29,12 @@ public class TopEnemySpawner : MonoBehaviour
         currWave = 1;
         GenerateWave();
         speed = 3;
-        counterTimer = 50;
-        score = 0;
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //scoreboard script
-        scoreBoard.text = "Score: " + score;
-        counterTimer--;
-        if(counterTimer < 0)
-        {
-            counterTimer = 50;
-            score++;
-        }
-
-
-
-
-
 
         //Spawning script
         if (spawnTimer <= 0)
@@ -59,7 +42,7 @@ public class TopEnemySpawner : MonoBehaviour
             //spawn an enemy
             if (enemiesToSpawn.Count > 0)
             {
-                GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], gameObject.transform, false); // spawn first enemy in our list
+                GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], gameObject.transform.parent.transform, false); // spawn first enemy in our list
                 enemy.transform.position = new Vector3(spawnLocation[spawnIndex].position.x, spawnLocation[spawnIndex].position.y, -1);
                 enemy.GetComponent<BasicObstacleSpeedT>().layer = spawnIndex + 1;
                 enemy.GetComponent<BasicObstacleSpeedT>().speed = speed;
