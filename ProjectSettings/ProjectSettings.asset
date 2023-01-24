@@ -152,7 +152,7 @@ PlayerSettings:
   targetPixelDensity: 30
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
-  androidSupportedAspectRatio: 1
+  androidSupportedAspectRatio: 0
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.com.unity.template.mobile2D
@@ -277,7 +277,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 9347683c451d0d14b803349ed60efbc3, type: 3}
+      m_Icon: {fileID: 2800000, guid: 10f24e0cb7295d54fb1ac046ea95b090, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 public class SwitchPerspective : MonoBehaviour
 {
 
@@ -28,6 +29,8 @@ public class SwitchPerspective : MonoBehaviour
             topdownview.transform.position = new Vector3(0, 0, 0);
             modeSide = false;
             joystick.sprite = T;
+            topdownview.transform.Find("SubmarineT").GetComponent<PlayerInput>().enabled = true;
+            sideview.transform.Find("SubmarineS").GetComponent<PlayerInput>().enabled = false;
         }
         else
         {
@@ -35,6 +38,8 @@ public class SwitchPerspective : MonoBehaviour
             sideview.transform.position = new Vector3(0, 0, 0);
             modeSide = true;
             joystick.sprite = S;
+            topdownview.transform.Find("SubmarineT").GetComponent<PlayerInput>().enabled = false;
+            sideview.transform.Find("SubmarineS").GetComponent<PlayerInput>().enabled = true;
         }
     }
 }

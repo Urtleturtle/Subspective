@@ -17,6 +17,7 @@ public class TopDownController : MonoBehaviour
     public PlayerInput playerInput;
     public GameObject viewButton;
     public ScoreManager scoreManager;
+    public TextMeshProUGUI debug;
 
     [SerializeField]
     private float layerbound1, layerbound2;
@@ -28,9 +29,12 @@ public class TopDownController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(!(rotationVelocity > 0 && rb.rotation >= 26 || rotationVelocity < 0 && rb.rotation <= -30)){
+        //debug.text = playerInput.actions["Move"].ReadValue<Vector2>().ToString();
+
+
+        if (!(rotationVelocity > 0 && rb.rotation >= 26 || rotationVelocity < 0 && rb.rotation <= -30)){
             rb.MoveRotation(rb.rotation + rotationVelocity);
             rb.velocity = new Vector2(-(.1f * rb.rotation), 0);
         }
@@ -39,6 +43,7 @@ public class TopDownController : MonoBehaviour
             rotationVelocity = 0;
         }
         //cap Rvelocity to 1 or -1
+
         if (Input.GetKey(KeyCode.A) && !boundl)
         {
             if (rotationVelocity < .7f)
@@ -57,7 +62,7 @@ public class TopDownController : MonoBehaviour
         }
         else if (playerInput.actions["Move"].ReadValue<Vector2>().x < 0 && !boundl && !viewButton.GetComponent<SwitchPerspective>().modeSide)
         {
-            
+
             if (rotationVelocity < .7f)
             {
                 rotationVelocity = .3f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
@@ -74,9 +79,9 @@ public class TopDownController : MonoBehaviour
         }
         else
         {
-            if(rb.rotation < -1 || rb.rotation > 1)
+            if (rb.rotation < -1 || rb.rotation > 1)
             {
-                rotationVelocity += -rb.rotation/10000.0f;
+                rotationVelocity += -rb.rotation / 500.0f;
             }
             else
             {

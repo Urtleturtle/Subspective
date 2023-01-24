@@ -19,6 +19,7 @@ public class SideController : MonoBehaviour
     public PlayerInput playerInput;
     public GameObject viewButton;
     public ScoreManager scoreManager;
+    public TextMeshProUGUI debug;
 
     // Start is called before the first frame update
     void Start()
@@ -30,44 +31,48 @@ public class SideController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(transform.localPosition.y <= waterline)
+        //debug.text = playerInput.actions["Move"].ReadValue<Vector2>().ToString();
+
+
+        if (transform.localPosition.y <= waterline)
         {
             //rb.gravityScale = Mathf.Lerp(rb.gravityScale, 0, 0.5f); 
             rb.gravityScale = 0;
+            
             if (Input.GetKey(KeyCode.S))
             {
-                rb.velocity += new Vector2(0, -0.004f);
+                rb.velocity += new Vector2(0, -0.03f);
             }
             else if (Input.GetKey(KeyCode.W))
             {
-                rb.velocity += new Vector2(0, 0.004f);
+                rb.velocity += new Vector2(0, 0.03f);
             }
             else if (playerInput.actions["Move"].ReadValue<Vector2>().y < 0 && viewButton.GetComponent<SwitchPerspective>().modeSide)
             {
-                rb.velocity += new Vector2(0, -0.004f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
+                rb.velocity += new Vector2(0, -0.03f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
             }
             else if (playerInput.actions["Move"].ReadValue<Vector2>().y > 0 && viewButton.GetComponent<SwitchPerspective>().modeSide)
             {
-                rb.velocity += new Vector2(0, 0.004f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
+                rb.velocity += new Vector2(0, 0.03f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().y));
             }
             else
             {
                 if (rb.velocity.y > 0)
                 {
-                    rb.velocity += new Vector2(0, -(rb.velocity.y / 600.0f));
+                    rb.velocity += new Vector2(0, -(rb.velocity.y / 60.0f));
                 }
                 else if (rb.velocity.y < 0)
                 {
 
                     if (Math.Abs(transform.localPosition.y - waterline) < .3f)
                     {
-                        rb.velocity += new Vector2(0, -(rb.velocity.y / 100.0f));
+                        rb.velocity += new Vector2(0, -(rb.velocity.y / 10.0f));
                     }
                     else
                     {
-                        rb.velocity += new Vector2(0, -(rb.velocity.y / 600.0f));
+                        rb.velocity += new Vector2(0, -(rb.velocity.y / 60.0f));
                     }
                 }
             }
