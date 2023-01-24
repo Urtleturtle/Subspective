@@ -15,6 +15,10 @@ public class BasicObstacleSpeedT : MonoBehaviour
         {
             GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateIcebergS(speed/9.2f* 5.5f, layer, gameObject);
         }
+        else if(gameObject.name.Contains("Megaiceberg"))
+        {
+            GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateMegaIcebergS(speed / 9.2f * 5.5f, layer, gameObject);
+        }
     }
  
 

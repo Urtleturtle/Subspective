@@ -18,7 +18,7 @@ public class TopEnemySpawner : MonoBehaviour
     private float waveTimer;
     private float spawnInterval;
     private float spawnTimer;
-    public bool start;
+    public bool generating;
     public float speed;
     
 
@@ -39,6 +39,7 @@ public class TopEnemySpawner : MonoBehaviour
         //Spawning script
         if (spawnTimer <= 0)
         {
+
             //spawn an enemy
             if (enemiesToSpawn.Count > 0)
             {
@@ -78,17 +79,18 @@ public class TopEnemySpawner : MonoBehaviour
         }
 
         print(waveTimer);
-        if (waveTimer <= 0 && start)
+        if (waveTimer <= 0 && !generating)
         {
             currWave++;
             spawnedEnemies.Clear();
             GenerateWave();
-            start = false;
+
         }
     }
 
     public void GenerateWave()
     {
+        generating = true;
         waveValue = (1+ (currWave-1)/5) * 50 ;
         GenerateEnemies();
 
@@ -104,7 +106,7 @@ public class TopEnemySpawner : MonoBehaviour
         // gives a fixed time between each enemies
         // wave duration is read only
         waveTimer = waveDuration + spawnInterval;
-        start = true;
+        generating = false;
     }
 
     public void GenerateEnemies()

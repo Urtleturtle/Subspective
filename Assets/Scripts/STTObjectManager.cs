@@ -6,6 +6,7 @@ public class STTObjectManager : MonoBehaviour
 {
 
     public GameObject[] Icebergs;
+    public GameObject[] Megaicebergs;
     public GameObject TopSub;
     // Start is called before the first frame update
     void Start()
@@ -37,5 +38,13 @@ public class STTObjectManager : MonoBehaviour
         Icebergclone.GetComponent<BasicObstacleSpeedS>().speed = speed;
         Icebergclone.GetComponent<BasicObstacleSpeedS>().layer = layer;
         Icebergclone.GetComponent<BasicObstacleSpeedS>().guideObj = guide.transform;
+    }
+    public void CreateMegaIcebergS(float speed, int layer, GameObject guide)
+    {
+        GameObject Megaicebergclone = Instantiate(Megaicebergs[Random.Range(0, Megaicebergs.Length - 1)], gameObject.transform.parent.transform, false);
+        Megaicebergclone.transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
+        Megaicebergclone.GetComponent<BasicObstacleSpeedS>().speed = speed;
+        Megaicebergclone.GetComponent<BasicObstacleSpeedS>().layer = layer;
+        Megaicebergclone.GetComponent<BasicObstacleSpeedS>().guideObj = guide.transform;
     }
 }

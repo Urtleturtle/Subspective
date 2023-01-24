@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI LoseText;
     public Button TryAgainButton;
     public TextMeshProUGUI LoseScorescreen;
+    public Image FadeScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +45,8 @@ public class ScoreManager : MonoBehaviour
         TryAgainButton.gameObject.SetActive(true);
         LoseScorescreen.enabled = true;
         LoseScorescreen.text = "You scored\n" + score + " points";
-        StartCoroutine(EG());
 
-    }
-    IEnumerator EG()
-    {
-        yield return new WaitForEndOfFrame();
+        LeanTween.moveLocalY(FadeScreen.gameObject, 0, 0.5f).setIgnoreTimeScale(true);
         Time.timeScale = 0;
     }
 }

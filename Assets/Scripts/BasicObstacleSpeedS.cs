@@ -11,6 +11,7 @@ public class BasicObstacleSpeedS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = 1;
         startingX = transform.localPosition.x;
     }
 
@@ -26,7 +27,7 @@ public class BasicObstacleSpeedS : MonoBehaviour
             transform.localPosition = new Vector3((guideObj.localPosition.y)/9.2f * 5.5f, transform.localPosition.y, transform.localPosition.z);
         }
 
-        if (Mathf.Abs(transform.localPosition.x - startingX) > 9)
+        if (Mathf.Abs(transform.localPosition.x - startingX) > 7)
         {
             Destroy(gameObject);
         }
