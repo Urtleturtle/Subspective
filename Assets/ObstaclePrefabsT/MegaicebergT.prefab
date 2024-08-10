@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1340536587737747369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398696052883466029}
+  m_Layer: 0
+  m_Name: edgepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &398696052883466029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340536587737747369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.038, y: -0.482, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6293349870139852406}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6293349870139852407
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,10 +58,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6293349870139852407}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.76941323, y: 0.8027103, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 398696052883466029}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,17 +143,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.3286273, y: 0.6142441}
-      - {x: -0.33251777, y: 0.5896063}
+    - - {x: 0.335528, y: 0.5912417}
+      - {x: -0.3279173, y: 0.5942068}
       - {x: -0.5478438, y: 0.31062865}
-      - {x: -0.56681585, y: 0.0521425}
-      - {x: -0.66194564, y: -0.018327534}
-      - {x: -0.65183985, y: -0.26024657}
-      - {x: -0.26170218, y: -0.49012256}
-      - {x: 0.17400748, y: -0.4585132}
+      - {x: -0.5964434, y: 0.06448731}
+      - {x: -0.66441464, y: -0.005982723}
+      - {x: -0.65924674, y: -0.26271552}
+      - {x: -0.266082, y: -0.4667635}
+      - {x: 0.1973666, y: -0.46581292}
       - {x: 0.5201944, y: -0.20759523}
-      - {x: 0.6148346, y: -0.0044235587}
-      - {x: 0.5519951, y: 0.44226098}
+      - {x: 0.59873295, y: 0.0024771392}
+      - {x: 0.5991115, y: 0.13044614}
+      - {x: 0.5289928, y: 0.45836264}
 --- !u!114 &6293349870139852395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   layer: 0
+  distance: 0

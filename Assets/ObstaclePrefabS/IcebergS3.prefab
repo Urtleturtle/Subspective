@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2337239948855488386}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,6 +115,7 @@ PolygonCollider2D:
     - - {x: 0.45811808, y: 0.19375946}
       - {x: 0.31412706, y: 0.29663673}
       - {x: -0.031326223, y: 0.29960766}
+      - {x: -0.032540455, y: 0.24628383}
       - {x: -0.34046435, y: 0.25367278}
       - {x: -0.43355274, y: 0.1512085}
       - {x: -0.59177023, y: -0.20837921}
@@ -146,3 +148,37 @@ MonoBehaviour:
   speed: 0
   layer: 0
   guideObj: {fileID: 0}
+  hasGuideObj: 0
+  raycastpoint: {fileID: 0}
+  distance: 0
+--- !u!1 &4160911146284314309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2337239948855488386}
+  m_Layer: 0
+  m_Name: edgepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2337239948855488386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160911146284314309}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.191, y: 0.29, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6934155716256244232}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

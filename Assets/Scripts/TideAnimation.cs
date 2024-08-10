@@ -32,11 +32,10 @@ public class TideAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         
         foreach(GameObject waveobj in waves)
         {
-            waveobj.transform.position -= new Vector3(0.01f * speed,0,0f);
+            waveobj.transform.position -= new Vector3(0.01f * speed,0,0f) * Time.deltaTime * 50;
             if(Mathf.Abs(waveobj.transform.localPosition.x) < Mathf.Abs(middleWave.transform.localPosition.x))
             {
                 middleWave = waveobj;

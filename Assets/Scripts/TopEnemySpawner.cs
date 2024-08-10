@@ -26,7 +26,7 @@ public class TopEnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currWave = 1;
+        currWave = 7;
         GenerateWave();
         speed = 3;
         
@@ -78,10 +78,13 @@ public class TopEnemySpawner : MonoBehaviour
             waveTimer -= Time.fixedDeltaTime;
         }
 
-        print(waveTimer);
         if (waveTimer <= 0 && !generating)
         {
-            currWave++;
+            if (currWave < 7)
+            {
+                currWave++;
+            }
+            
             spawnedEnemies.Clear();
             GenerateWave();
 
@@ -91,7 +94,7 @@ public class TopEnemySpawner : MonoBehaviour
     public void GenerateWave()
     {
         generating = true;
-        waveValue = (1+ (currWave-1)/5) * 50 ;
+        waveValue = (1+ (currWave-1)/5) * 40 ;
         GenerateEnemies();
 
         if(enemiesToSpawn.Count != 0)

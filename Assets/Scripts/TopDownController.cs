@@ -12,7 +12,7 @@ public class TopDownController : MonoBehaviour
     public float rotationVelocity = 0;
     bool boundl, boundr;
     public int depth;
-    public int layer;
+    public float layer;
 
     public PlayerInput playerInput;
     public GameObject viewButton;
@@ -34,7 +34,7 @@ public class TopDownController : MonoBehaviour
         //debug.text = playerInput.actions["Move"].ReadValue<Vector2>().ToString();
 
 
-        if (!(rotationVelocity > 0 && rb.rotation >= 26 || rotationVelocity < 0 && rb.rotation <= -30)){
+        if (!(rotationVelocity > 0 && rb.rotation >= 26 || rotationVelocity < 0 && rb.rotation <= -26)){
             rb.MoveRotation(rb.rotation + rotationVelocity);
             rb.velocity = new Vector2(-(.1f * rb.rotation), 0);
         }
@@ -48,7 +48,7 @@ public class TopDownController : MonoBehaviour
         {
             if (rotationVelocity < .7f)
             {
-                rotationVelocity = .3f;
+                rotationVelocity = .4f;
             }
             boundr = false;
         }
@@ -56,24 +56,24 @@ public class TopDownController : MonoBehaviour
         {
             if (rotationVelocity > -.7f)
             {
-                rotationVelocity = -.3f;
+                rotationVelocity = -.4f;
             }
             boundl = false;
         }
-        else if (playerInput.actions["Move"].ReadValue<Vector2>().x < 0 && !boundl && !viewButton.GetComponent<SwitchPerspective>().modeSide)
+        else if (playerInput.actions["Move"].ReadValue<Vector2>().x < -0.1f && !boundl && !viewButton.GetComponent<SwitchPerspective>().modeSide)
         {
 
             if (rotationVelocity < .7f)
             {
-                rotationVelocity = .3f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
+                rotationVelocity = .4f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
             }
             boundr = false;
         }
-        else if (playerInput.actions["Move"].ReadValue<Vector2>().x > 0 && !boundr && !viewButton.GetComponent<SwitchPerspective>().modeSide)
+        else if (playerInput.actions["Move"].ReadValue<Vector2>().x > 0.1f && !boundr && !viewButton.GetComponent<SwitchPerspective>().modeSide)
         {
             if (rotationVelocity > -.7f)
             {
-                rotationVelocity = -.3f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
+                rotationVelocity = -.4f * Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x);
             }
             boundl = false;
         }
@@ -81,7 +81,7 @@ public class TopDownController : MonoBehaviour
         {
             if (rb.rotation < -1 || rb.rotation > 1)
             {
-                rotationVelocity += -rb.rotation / 500.0f;
+                rotationVelocity += -rb.rotation / 400.0f;
             }
             else
             {
@@ -102,11 +102,34 @@ public class TopDownController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
         }
 
-        if(transform.localPosition.x <= layerbound1)
+        /*
+        if(transform.localPosition.x <= layerbound1 - 0.15f)
         {
             layer = 1;
         }
-        else if(transform.localPosition.x <= layerbound2)
+        else if(transform.localPosition.x <= layerbound1 + 0.15f)
+        {
+            layer = 1.5f;
+        }
+        else if (transform.localPosition.x <= layerbound2-0.15f)
+        {
+            layer = 2;
+        }
+        else if (transform.localPosition.x <= layerbound2 + 0.15f)
+        {
+            layer = 2.5f;
+        }
+        else
+        {
+            layer = 3;
+        }
+        */
+
+        if (transform.localPosition.x <= layerbound1)
+        {
+            layer = 1;
+        }
+        else if (transform.localPosition.x <= layerbound2)
         {
             layer = 2;
         }
@@ -114,7 +137,6 @@ public class TopDownController : MonoBehaviour
         {
             layer = 3;
         }
-
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -132,7 +154,9 @@ public class TopDownController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("TopObstacle") && depth <= 2)
         {
+            print(collision.attachedRigidbody);
             scoreManager.EndGame();
+            
 
 
         }

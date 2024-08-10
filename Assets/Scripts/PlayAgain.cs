@@ -22,4 +22,9 @@ public class PlayAgain : MonoBehaviour
         SceneManager.LoadScene("GamePlay");
         Time.timeScale = 1;
     }
+    public void menu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+    }
 }
