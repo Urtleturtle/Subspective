@@ -18,11 +18,11 @@ public class BasicObstacleSpeedT : MonoBehaviour
         startingY = transform.localPosition.y;
         if (gameObject.name.Contains("Iceberg"))
         {
-            SideClone = GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateIcebergS(speed * 0.5873f, layer, gameObject);
+            SideClone = GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateIcebergS(speed*0.55f, layer, gameObject);
         }
         else if(gameObject.name.Contains("Megaiceberg"))
         {
-            SideClone = GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateMegaIcebergS(speed * 0.5873f, layer, gameObject);
+            SideClone = GameObject.Find("STTOM").GetComponent<STTObjectManager>().CreateMegaIcebergS(speed * 0.55f, layer, gameObject);
         }
     }
  

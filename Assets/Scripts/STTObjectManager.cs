@@ -44,7 +44,7 @@ public class STTObjectManager : MonoBehaviour
             else if (c.layer < (int)TopSub.GetComponent<TopDownController>().layer && (int)TopSub.GetComponent<TopDownController>().layer - c.layer == 1)
             {
                 g.GetComponent<SpriteRenderer>().enabled = true;
-                g.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255,100);
+                g.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255,60);
                 g.GetComponent<PolygonCollider2D>().enabled = false;
             }
             else

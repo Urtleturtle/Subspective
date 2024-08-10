@@ -6,6 +6,8 @@ public class SideEnemySpawner : MonoBehaviour
 {
 
     public List<EnemyS> enemies = new List<EnemyS>();
+    public List<GameObject> treasures = new List<GameObject>();
+
     public int currWave;
     private int waveValue;
     public List<int> enemiesToSpawn = new List<int>();
@@ -44,6 +46,19 @@ public class SideEnemySpawner : MonoBehaviour
                 StartCoroutine(spawnGroup(es, Random.Range(es.instancesMin, es.instancesMax), Random.Range(1, 4)));
 
                 spawnTimer = spawnInterval;
+
+
+                //random change for treasure chest
+                if (Random.Range(0, 101) < 20)
+                {
+                    GameObject treasure = (GameObject)Instantiate(treasures[0], gameObject.transform.parent.transform, false); // spawn first enemy in our list
+                    treasure.transform.localPosition = new Vector3(transform.localPosition.x, -4.43f, 1);
+                    treasure.GetComponent<BasicObstacleSpeedS>().speed = speed;
+                    treasure.GetComponent<BasicObstacleSpeedS>().guideObj = null;
+                    treasure.GetComponent<BasicObstacleSpeedS>().layer = Random.Range(1,4);
+                    treasure.GetComponent<BasicObstacleSpeedS>().hasGuideObj = 2;
+                }
+
             }
             else
             {

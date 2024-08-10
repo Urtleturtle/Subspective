@@ -44,20 +44,16 @@ public class BasicObstacleSpeedS : MonoBehaviour
 
         }
 
-        if (hasGuideObj == 1 && guideObj.GetComponent<BasicObstacleSpeedT>().distance > 0.1f)
+        if (hasGuideObj == 1 && guideObj.gameObject.GetComponent<BasicObstacleSpeedT>().distance != 0)
         {
-            if (distance > guideObj.GetComponent<BasicObstacleSpeedT>().distance * 0.5873f)
-            {
-                speed += 0.005f;
-            }
-            else if (distance < guideObj.GetComponent<BasicObstacleSpeedT>().distance * 0.5873f)
-            {
-                speed -= 0.005f;
-            }
+            transform.position = new Vector3(transform.position.x-distance + 3.5f * (guideObj.gameObject.GetComponent<BasicObstacleSpeedT>().distance / 6.35f), transform.position.y, transform.position.z);
         }
-        
+        else
+        {
+            transform.position -= new Vector3(0.01f * speed, 0, 0) * Time.deltaTime * 50;
+        }
 
-        transform.position -= new Vector3(0.01f * speed, 0, 0) * Time.deltaTime * 50;
+        
         
        
         
